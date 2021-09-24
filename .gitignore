@@ -36,7 +36,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-config.py 
+
 
 
 # PyInstaller
@@ -278,7 +278,10 @@ psd
 thumb
 sketch
 
+
+### 보안유지 ###
 data/
 src/
+config.py
 
 # End of https://www.toptal.com/developers/gitignore/api/node,flask,react

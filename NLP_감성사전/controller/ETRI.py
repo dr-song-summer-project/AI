@@ -2,7 +2,7 @@ import re
 from typing import OrderedDict
 import urllib3
 import json
-import config
+import NLP_감성사전.config as config
 
 class Etri:
     def __init__(self, text):
