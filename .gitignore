@@ -278,4 +278,7 @@ psd
 thumb
 sketch
 
+data/
+src/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,flask,react
