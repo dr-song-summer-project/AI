@@ -6,8 +6,13 @@ from keyword_convert import read_file, to_excel, keyword
 
 class readFile:
     def __init__(self):
-        self.path_train = 'data/unlabeled_data.csv'
+        self.path_train = 'data/train_data.csv'
         self.df = read_csv(self.path_train)
+        ######################train data의 unlabel화
+        self.df = self.df.drop(['Label'], axis=1)
+        self.df['reviewIndex'] = self.df['reviewIndex'].map(lambda x : x+14000)
+        #######################
+        print(self.df)
     
     def getContent(self):
         return self.df['reviewContent']
@@ -19,7 +24,7 @@ class readFile:
     def to_tsv(self, content):
         self.df['reviewContent'] = content
         # DataFrame 이나 Serises 를 txt 파일로 깔끔하게 바꿀경우 (이건 tsv)
-        self.df.to_csv('src/unlabeld_data_prepro.txt', index=False, sep="\t")
+        self.df.to_csv('src/train_data_prepro.txt', index=False, sep="\t")
 
 def preprocessing():
     read = readFile()
