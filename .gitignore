@@ -284,4 +284,7 @@ data/
 src/
 config.py
 
+###khaiii 제외####
+khaiii/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,flask,react
