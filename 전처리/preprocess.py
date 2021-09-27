@@ -8,7 +8,7 @@ from tqdm import tqdm
 ###################전처리부######################
 # Basic proprocessing : 태그 제거, "@%*=()/+ 와 같은 punctuation 제거
 # Spell check(맞춤법, 띄어쓰기)
-# pip install git+https://github.com/haven-jeon/PyKoSpacing.git   : 띄어쓰기 검사
+#  pip install git+https://github.com/haven-jeon/PyKoSpacing.git  : 띄어쓰기 검사
 # pip install tensorflow
 # pip install keras
 # pip install git+https://github.com/ssut/py-hanspell.git         : 맞춤법 검사  **500자 이상 안됨
