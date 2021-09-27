@@ -1,7 +1,6 @@
 from controller.ETRI import Etri
 from controller.KNU import KnuSL
 
-
 def etri_process_getMorphList(text) :
     etri = Etri(text)
     morph_list = etri.makeList()

@@ -1,11 +1,11 @@
-from flask import Flask, request
-from flask_restx import Api, Resource, reqparse
+# from flask import Flask, request
+# from flask_restx import Api, Resource, reqparse
 
 import json
 from collections import OrderedDict
-# from khaiii import KhaiiiApi
+from khaiii import KhaiiiApi
 
-# api = KhaiiiApi()
+api = KhaiiiApi()
 
 # 형태소 분석 과정 (형태소 분해부)
 def nlp_process(text):
