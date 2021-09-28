@@ -3,9 +3,6 @@ import os
 import re
 import sys
 import urllib3
-
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-
 import config
 
 class Etri:

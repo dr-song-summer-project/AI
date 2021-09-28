@@ -21,7 +21,8 @@ class Preprocess:
         self.punct_mapping = {"‘": "'", "₹": "e", "´": "'", "°": "", "€": "e", "™": "tm", "√": " sqrt ", "×": "x",
                               "²": "2", "—": "-", "–": "-", "’": "'", "_": "-", "`": "'",
                               '“': '"', '”': '"', '“': '"', "£": "e", '∞': 'infinity', 'θ': 'theta', '÷': '/',
-                              'α': 'alpha', '•': '.', 'à': 'a', '−': '-', 'β': 'beta', '∅': '', '³': '3', 'π': 'pi', }
+                              'α': 'alpha', '•': '.', 'à': 'a', '−': '-', 'β': 'beta', '∅': '', '³': '3', 'π': 'pi',
+                              "^": ""}
         self.rule = ['맘시터', '스케줄', '스케쥴', '시터', '시터분', '시터 분']  # 띄어쓰기 규칙
 
     def basic_Preprocessing(self, content, punct, mapping):  # html tag 제거, 숫자 제거, Lowercasing, punctuation 제거
@@ -34,6 +35,8 @@ class Preprocess:
                 text = text.replace('"', '')
                 text = text.replace('&', ',')
                 text = text.replace('@', '')
+                text = text.replace(':)', '')
+                text = text.replace('❤️', '')
 
             specials = {'\u200b': ' ', '…': ' ... ', '\ufeff': '', 'करना': '', 'है': ''}
             for s in specials:
