@@ -1,7 +1,11 @@
-﻿import re
-from typing import OrderedDict
+﻿import json
+import os
+import re
+import sys
 import urllib3
-import json
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 import config
 
 class Etri:

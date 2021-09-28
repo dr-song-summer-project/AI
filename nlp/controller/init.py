@@ -1,5 +1,5 @@
-from controller.ETRI import Etri
-from controller.KNU import KnuSL
+from nlp.controller.ETRI import Etri
+from nlp.controller.KNU import KnuSL
 
 def etri_process_getMorphList(text) :
     etri = Etri(text)

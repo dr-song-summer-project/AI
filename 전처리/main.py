@@ -28,8 +28,11 @@ class readFile:
 
 def preprocessing():
     read = readFile()
+    print('readFile done')
     prepro = preprocess.Preprocess(read.getContent())
+    print('prepro done')
     read.to_tsv(prepro.proprocess())
+    print('to_tsv done')
     # prepro.spell_text()
 
 def get_keyword():
@@ -37,8 +40,8 @@ def get_keyword():
     sentence = read_file(path)
     convert_keyword = []
     for i in tqdm(range(0, len(sentence))) :
-        # convert_keyword.append(keyword_(sentence[i]))  #파이참에서 Okt가 실행되지 않아 Colab에서 진행 후 파일 업로드
-        convert_keyword.append(remove_tag((sentence[i])))
+        convert_keyword.append(keyword(sentence[i]))  #파이참에서 Okt가 실행되지 않아 Colab에서 진행 후 파일 업로드
+        # convert_keyword.append(remove_tag((sentence[i])))
     print(convert_keyword)
     df = pd.DataFrame([ x for x in convert_keyword])
     df.to_excel('src/unlabeled_data_keyword.xlsx', sheet_name='sentence')

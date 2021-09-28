@@ -85,7 +85,7 @@ guess_path = '../data/test_results.tsv'
 
 
 ##긍부정 정확도
-labels(label_path, guess_path)
+# labels(label_path, guess_path)
 
 ##리뷰 타입 정확도
 reviewType(label_path, guess_path)

@@ -3,7 +3,7 @@ from controller.nlp_controller import nlp_process
 from controller.init import etri_process_getSrl, etri_process_getMorphList, KNU_process
 import kss
 
-class ApiForCorpus():
+class ApiForCorpus(): #khaiii
     def __init__(self, corpus):
         # originCorpus = request.json.get('corpus')
         self.originCorpus = corpus
@@ -12,7 +12,7 @@ class ApiForCorpus():
         processed_corpus = nlp_process(self.originCorpus)
         return processed_corpus
 
-class divideCorpus():
+class divideCorpus():  #etri
     def __init__(self, corpus):
         self.corpus = corpus
 
@@ -50,12 +50,12 @@ if __name__ == "__main__":
     # corpus = '서비스는 괜찮고 음식은 별로에요.'
     corpus = '저는 아이 돌보는 것을 참 좋아하는 학생입니다. 그런데 솔직히 너무 너무 힘들었어요. 아이가 자기하고싶은대로만 하려고 해서 혼내면 욕하고 때리려고하고.. 아이가 너무 폭력적이었어요. ' \
              '놀이터에 나가서도 다른 어린친구들 괴롭히려고 하는데 어찌해야할지 모르겠더라구요.'
-    # api = ApiForCorpus(corpus).getCorpus()
-    # print(api)
-    divide = divideCorpus(corpus).getCorpus()
-    for each in divide:
-        each_score = 0
-        print(each['phrase'])
-        for senti in each['sentiScore']:
-            # each_score += int(senti['score'])
-            print(senti)
+    api = ApiForCorpus(corpus).getCorpus()
+    print(api)
+    # divide = divideCorpus(corpus).getCorpus()
+    # for each in divide:
+    #     each_score = 0
+    #     print(each['phrase'])
+    #     for senti in each['sentiScore']:
+    #         # each_score += int(senti['score'])
+    #         print(senti)

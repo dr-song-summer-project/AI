@@ -1,4 +1,4 @@
-import kss
+# import kss
 from pykospacing import Spacing
 from hanspell import spell_checker
 from soynlp.normalizer import *
@@ -70,3 +70,8 @@ class Preprocess:
         spell_content = self.spell_check(self.content)
 
         return spell_content
+
+corpus = '저는 아이 돌보는 것을 참 좋아하는 학생입니다. 그런데 솔직히 너무 너무 힘들었어요. 아이가 자기하고싶은대로만 하려고 해서 혼내면 욕하고 때리려고하고.. 아이가 너무 폭력적이었어요. ' \
+             '놀이터에 나가서도 다른 어린친구들 괴롭히려고 하는데 어찌해야할지 모르겠더라구요.'
+tmp = Preprocess(corpus)
+tmp.spell_text()
