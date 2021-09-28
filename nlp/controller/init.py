@@ -23,13 +23,13 @@ def etri_process_getSrl(text) :
 
 def KNU_process(text) :
     etri = Etri(text)
-    ksl = KnuSL
+    ksl = KnuSL()
     result = [] #sa
     sigMorp = etri.getSignMorpList()
     for morp in sigMorp :
         tmp_dic = {"morp" : morp[0]}
         r, s= ksl.data_list(morp[0])
         tmp_dic['root'] = r
-        tmp_dic['score'] = s        
+        tmp_dic['score'] = s
         result.append(tmp_dic)    
     return result

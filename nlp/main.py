@@ -1,7 +1,12 @@
 from collections import OrderedDict
+
+import pandas as pd
+from tqdm.notebook import tqdm
+
 from controller.nlp_controller import nlp_process
 from controller.init import etri_process_getSrl, etri_process_getMorphList, KNU_process
 import kss
+from pandas.io.parsers import read_csv
 
 class ApiForCorpus(): #khaiii
     def __init__(self, corpus):
@@ -13,18 +18,18 @@ class ApiForCorpus(): #khaiii
         return processed_corpus
 
 class divideCorpus():  #etri
-    def __init__(self, corpus):
-        self.corpus = corpus
+    def __init__(self):
+        print('객체 생성')
 
-    def splitSentence(self):
+    def splitSentence(self, corpus):
         self.splittedSentence = []
-        for sent in kss.split_sentences(self.corpus):
+        for sent in kss.split_sentences(corpus):
             print('문장 구분 :', sent)
             self.splittedSentence.append(sent)
 
-    def getCorpus(self):
+    def getCorpus(self,corpus):
         result = []
-        self.splitSentence()
+        self.splitSentence(corpus)
         for originCorpus in self.splittedSentence:
             processed_corpues = OrderedDict()
             processed_corpues0 = etri_process_getMorphList(originCorpus) #morph
@@ -45,17 +50,32 @@ class knuCorpus():
         return processed_corpus
         #받은 문장을 가지고 분석 시장
 
+
 if __name__ == "__main__":
     # senti_Score = []
     # corpus = '서비스는 괜찮고 음식은 별로에요.'
-    corpus = '저는 아이 돌보는 것을 참 좋아하는 학생입니다. 그런데 솔직히 너무 너무 힘들었어요. 아이가 자기하고싶은대로만 하려고 해서 혼내면 욕하고 때리려고하고.. 아이가 너무 폭력적이었어요. ' \
-             '놀이터에 나가서도 다른 어린친구들 괴롭히려고 하는데 어찌해야할지 모르겠더라구요.'
-    api = ApiForCorpus(corpus).getCorpus()
-    print(api)
-    # divide = divideCorpus(corpus).getCorpus()
-    # for each in divide:
-    #     each_score = 0
-    #     print(each['phrase'])
-    #     for senti in each['sentiScore']:
-    #         # each_score += int(senti['score'])
-    #         print(senti)
+    df = read_csv('../data/TrainData/train_prepro.csv')
+    result = pd.DataFrame()
+    corpuses = df['reviewContent'].values.tolist()
+    print(corpuses)
+    # corpus = '매주 오셔서 아이와 잘 놀아주세요~아이가 원해서 주 2회로 늘릴 예정입니다 성실하고 좋으신 분 같습니다.'
+    mc = []
+    divideCor = divideCorpus()
+    for corpus in tqdm(corpuses):
+        mc_tmp = []
+        divide = divideCor.getCorpus(corpus)
+        for each in divide:
+            tmp = []
+            for senti in each['sentiScore']:
+                tmp.append(senti['morp'] + '/' + senti['score'])
+            mc_tmp.append(tmp)
+        mc.append(mc_tmp)
+    print(mc)
+
+    # raw_data={'reviewIndex':df['reviewIndex'].values.tolist(),
+    #           'reviewContent': df['reviewContent'].values.tolist(),
+    result['reviewIndex'] = df['reviewIndex']
+    result['reviewContent'] = df['reviewContent']
+    result['phraseSent'] = mc
+
+    result.to_csv('src/train_phraseSent.csv')
