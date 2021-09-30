@@ -9,8 +9,8 @@ class readFile:
         self.path_train = 'data/train_data.csv'
         self.df = read_csv(self.path_train)
         ######################train data의 unlabel화(train_plus_unabled.txt)0
-        self.df = self.df.drop(['Label'], axis=1)
-        self.df['reviewIndex'] = self.df['reviewIndex'].map(lambda x : x+14000)
+        # self.df = self.df.drop(['Label'], axis=1)
+        # self.df['reviewIndex'] = self.df['reviewIndex'].map(lambda x : x+14000)
         #######################
         print(self.df)
     
@@ -44,7 +44,7 @@ def get_keyword():
         # convert_keyword.append(remove_tag((sentence[i])))
     print(convert_keyword)
     df = pd.DataFrame([ x for x in convert_keyword])
-    df.to_excel('src/unlabeled_data_keyword.xlsx', sheet_name='sentence')
+    df.to_excel('src/train_data_keyword.xlsx', sheet_name='sentence')
 
 if __name__ == '__main__' :
     preprocessing()
