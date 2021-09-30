@@ -1,11 +1,12 @@
 from collections import OrderedDict
 
 import pandas as pd
+import ast
 from tqdm.notebook import tqdm
 
 from controller.nlp_controller import nlp_process
 from controller.init import etri_process_getSrl, etri_process_getMorphList, KNU_process
-import kss
+# import kss
 from pandas.io.parsers import read_csv
 
 class ApiForCorpus(): #khaiii
@@ -50,15 +51,11 @@ class knuCorpus():
         return processed_corpus
         #받은 문장을 가지고 분석 시장
 
-
-if __name__ == "__main__":
-    # senti_Score = []
-    # corpus = '서비스는 괜찮고 음식은 별로에요.'
+def analysisCSV():
     df = read_csv('../data/TrainData/train_prepro.csv')
     result = pd.DataFrame()
     corpuses = df['reviewContent'].values.tolist()
     print(corpuses)
-    # corpus = '매주 오셔서 아이와 잘 놀아주세요~아이가 원해서 주 2회로 늘릴 예정입니다 성실하고 좋으신 분 같습니다.'
     mc = []
     divideCor = divideCorpus()
     for corpus in tqdm(corpuses):
@@ -72,10 +69,53 @@ if __name__ == "__main__":
         mc.append(mc_tmp)
     print(mc)
 
-    # raw_data={'reviewIndex':df['reviewIndex'].values.tolist(),
-    #           'reviewContent': df['reviewContent'].values.tolist(),
     result['reviewIndex'] = df['reviewIndex']
     result['reviewContent'] = df['reviewContent']
     result['phraseSent'] = mc
 
     result.to_csv('src/train_phraseSent.csv')
+
+
+
+def analysisSentence(corpus):
+
+    divideCor = divideCorpus()
+    divide = divideCor.getCorpus(corpus)
+    for each in divide:
+        for senti in each['sentiScore']:
+            print (senti['morp']+':'+senti['score'], end = ' ')
+        print()
+
+
+#########3
+def change_form():
+    df = read_csv('src/train_phraseSent.csv', )
+    datas = df['phraseSent'].values.tolist()
+
+    result = []
+    for data in datas:
+        data = ast.literal_eval(data)
+        content_size = len(datas)
+        content_value = [[] for _ in range(content_size)]
+        for i, content in enumerate(data):
+            for morph in content:
+                morph = morph.split('/')
+                if morph[1] == 'None':
+                    continue
+                content_value[i].append(morph[1])
+        result.append(content_value[i])
+    print(result)
+    return content_value
+
+
+
+
+
+if __name__ == "__main__":
+    # corpus = '매주 오셔서 아이와 잘 놀아주세요~아이가 원해서 주 2회로 늘릴 예정입니다성실하고 좋으신 분 같습니다.'
+    # khai = ApiForCorpus(corpus).getCorpus()
+    # print(khai)
+
+    (change_form())
+
+    # analysisSentence(corpus)
