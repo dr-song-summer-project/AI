@@ -6,7 +6,7 @@ from tqdm.notebook import tqdm
 
 from controller.nlp_controller import nlp_process
 from controller.init import etri_process_getSrl, etri_process_getMorphList, KNU_process
-# import kss
+import kss
 from pandas.io.parsers import read_csv
 
 class ApiForCorpus(): #khaiii

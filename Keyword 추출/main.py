@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm.notebook import tqdm
 from collections import defaultdict
 import pandas as pd
-from konlpy.tag import Hannanum
+# from konlpy.tag import Hannanum
 
 
 def sorting(texts):
@@ -15,7 +15,7 @@ def sorting(texts):
 
 
 def read_file(path):
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, encoding='utf-8')
 
     is_recruit_review = df['reviewType'] == 'recruitReview'
     is_interview_review = df['reviewType'] == 'interviewReview'
@@ -49,7 +49,7 @@ def read_file(path):
 def get_tfIdf(reviewType, name):
     vectorizer = TfidfVectorizer()
     sp_matrix = vectorizer.fit_transform(reviewType)
-    hannanum = Hannanum()
+    # hannanum = Hannanum()
 
     word2id = defaultdict(lambda: 0)
     for idx, feature in enumerate(vectorizer.get_feature_names()):

@@ -67,7 +67,6 @@ def reviewType(label, guess):
     guesses = returnWhichBig_type(interview, failure, recruit)
 
     print('guesses:', len(guesses), ':', guesses)
-
     print('accuracy:', accuracy_score(labels, guesses))
     print('recall:', recall_score(labels, guesses, average='weighted'))
     print('precision:', precision_score(labels, guesses, average='weighted'))
