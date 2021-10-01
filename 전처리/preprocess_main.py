@@ -19,7 +19,7 @@ class readFile:
 
     def to_csv(self, content):
         self.df['reviewContent'] = content
-        self.df.to_csv('src/test_prepro.csv', index=False)
+        self.df.to_csv('src/unlabeled_data_prepro.csv', index=False)
 
     def to_tsv(self, content):
         self.df['reviewContent'] = content
@@ -32,8 +32,8 @@ def preprocessing():
     print('readFile done')
     prepro = preprocess.Preprocess(read.getContent())
     print('prepro done')
-    read.to_tsv(prepro.proprocess())
-    print('to_tsv done')
+    read.to_csv(prepro.proprocess())
+    print('to_csv done')
     # prepro.spell_text()
 
 def get_keyword():
