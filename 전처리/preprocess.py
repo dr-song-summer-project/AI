@@ -39,6 +39,11 @@ class Preprocess:
                 text = text.replace('❤️', '')
                 text = text.replace('☺️', '')
                 text= text.replace('☺', '')
+                text = text.replace('😊', '')
+                text = text.replace('♥️', '')
+                text = text.replace('😭', '')
+                text = text.replace('😅', '')
+                text = text.replace('😀', '')
 
             specials = {'\u200b': ' ', '…': ' ... ', '\ufeff': '', 'करना': '', 'है': ''}
             for s in specials:

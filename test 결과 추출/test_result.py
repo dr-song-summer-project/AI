@@ -24,6 +24,7 @@ def getType():
     df = pd.read_csv('../data/ResultData/리뷰타입_results.tsv', delimiter="\t")
     test_result = pd.DataFrame()
     test_result['reviewIndex'] = df['reviewIndex']
+    # test_result['reviewContent'] = df['reviewContent']
 
     interview = df['interviewReview'].values.tolist()
     failure = df['failureReview'].values.tolist()

@@ -31,11 +31,11 @@ class KnuSL():
 				result.append(data[i]['word'])
 				result.append(data[i]['polarity'])
 				break
-			elif data[i]['word_root'] == wordname :
-				result.pop()
-				result.pop()
-				result.append(data[i]['word_root'])
-				result.append(data[i]['polarity'])
+			# elif data[i]['word_root'] == wordname :
+			# 	result.pop()
+			# 	result.pop()
+			# 	result.append(data[i]['word_root'])
+			# 	result.append(data[i]['polarity'])
 		
 		r_word = result[0]
 		s_word = result[1]

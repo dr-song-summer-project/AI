@@ -78,7 +78,6 @@ def analysisCSV():
 
 
 def analysisSentence(corpus):
-
     divideCor = divideCorpus()
     divide = divideCor.getCorpus(corpus)
     for each in divide:
@@ -87,7 +86,6 @@ def analysisSentence(corpus):
         print()
 
 
-#########3
 def change_form():
     df = read_csv('src/train_phraseSent.csv', )
     datas = df['phraseSent'].values.tolist()
@@ -107,15 +105,11 @@ def change_form():
     print(result)
     return content_value
 
-
-
-
-
 if __name__ == "__main__":
-    # corpus = '매주 오셔서 아이와 잘 놀아주세요~아이가 원해서 주 2회로 늘릴 예정입니다성실하고 좋으신 분 같습니다.'
+    corpus = '매주 오셔서 아이와 잘 놀아주세요~아이가 원해서 주 2회로 늘릴 예정입니다성실하고 좋으신 분 같습니다.'
     # khai = ApiForCorpus(corpus).getCorpus()
     # print(khai)
+    #
+    # (change_form())
 
-    (change_form())
-
-    # analysisSentence(corpus)
+    analysisSentence(corpus)
