@@ -20,31 +20,44 @@ def returnWhichBig_type(a, b, c):  # a = interview, b = failure, c = recruit
             result.append('recruitReview')
     return result
 
-def getType():
-    df = pd.read_csv('../data/ResultData/리뷰타입_results.tsv', delimiter="\t")
+def getType(path):
+    with open(path, 'rb+') as fp:
+        file_text=fp.read()
+        fp.seek(0)
+        fp.write(b'reviewIndex	interviewReview	failureReview	recruitReview\n' + file_text)
+
+    df = pd.read_csv(path, delimiter="\t")
+    # column_name = ['reviewIndex', 'interviewReview', 'failureReview', 'recruitReview']
+    print(df)
+    # test_result = pd.DataFrame(df, columns=column_name)
+
     test_result = pd.DataFrame()
     test_result['reviewIndex'] = df['reviewIndex']
-    # test_result['reviewContent'] = df['reviewContent']
-
     interview = df['interviewReview'].values.tolist()
     failure = df['failureReview'].values.tolist()
     recruit = df['recruitReview'].values.tolist()
     test_result['reviewType'] = returnWhichBig_type(interview, failure, recruit)
     return test_result
 
-def getLabel():
-    df = pd.read_csv('../data/ResultData/긍부정_results.tsv', delimiter="\t")
+def getLabel(path):
+    with open(path, 'rb+') as fp:
+        file_text=fp.read()
+        fp.seek(0)
+        fp.write(b'reviewIndex	Negative	Positive\n' + file_text)
 
-    nega = df['0'].values.tolist()
-    posi = df['1'].values.tolist()
+    df = pd.read_csv(path, delimiter="\t")
+    column_name = ['reviewIndex', 'Negative', 'Positive']
+    df = pd.DataFrame(df, columns=column_name)
+    nega = df['Negative'].values.tolist()
+    posi = df['Positive'].values.tolist()
 
     return returnWhichBig_label(nega, posi)
 
 test_result = pd.DataFrame()
 
-test_result = getType()
-test_result['Label'] = getLabel()
+test_result = getType('../data/ResultData/리뷰타입_results_0930.tsv')
+test_result['Label'] = getLabel('../data/ResultData/긍부정_results.tsv')
 
 
 
-test_result.to_csv('test_data_result.csv', index = False)
+test_result.to_csv('test_data_result_0930.csv', index = False)

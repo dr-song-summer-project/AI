@@ -1,10 +1,10 @@
-# import kss
+import kss
 from pykospacing import Spacing
 from hanspell import spell_checker
 from soynlp.normalizer import *
 from tqdm import tqdm
 import re
-
+#
 ###################전처리부######################
 # Basic proprocessing : 태그 제거, "@%*=()/+ 와 같은 punctuation 제거
 # Spell check(맞춤법, 띄어쓰기)
