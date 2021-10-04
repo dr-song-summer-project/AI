@@ -12,19 +12,19 @@ class readFile:
         # self.df = self.df.drop(['Label'], axis=1)
         # self.df['reviewIndex'] = self.df['reviewIndex'].map(lambda x : x+14000)
         #######################
-        print(self.df)
+        print(self.df.head())
     
     def getContent(self):
         return self.df['reviewContent']
 
     def to_csv(self, content):
         self.df['reviewContent'] = content
-        self.df.to_csv('src/unlabeled_data_prepro.csv', index=False)
+        self.df.to_csv('src/unlabeled_data_prepro.csv', index=False, encoding='utf-8')
 
     def to_tsv(self, content):
         self.df['reviewContent'] = content
         # DataFrame 이나 Serises 를 txt 파일로 깔끔하게 바꿀경우 (이건 tsv)
-        self.df.to_csv('src/test_data_prepro.txt', index=False, sep="\t")
+        self.df.to_csv('src/test_data_prepro.txt', index=False, sep="\t", encoding='utf-8')
 
 
 def preprocessing():
@@ -34,7 +34,6 @@ def preprocessing():
     print('prepro done')
     read.to_csv(prepro.proprocess())
     print('to_csv done')
-    # prepro.spell_text()
 
 def get_keyword():
     path = 'data/unlabeled_data_prepro_keywordTemp.xlsx'
