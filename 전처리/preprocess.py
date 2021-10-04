@@ -19,13 +19,16 @@ class Preprocess:
         self.content = content
         self.punct = "/-'?!.,#$%\'()*+-/:;<=>@[\\]^_`{|}~" + '""“”’' + '∞θ÷α•à−β∅³π‘₹´°£€\×™√²—–&'
         self.punct_mapping = {"‘": "'", "₹": "e", "´": "'", "°": "", "€": "e", "™": "tm", "√": " sqrt ", "×": "x",
-                              "²": "2", "—": "-", "–": "-", "’": "'", "_": "-", "`": "'", "*" : "",
-                              '“': '"', '”': '"', '“': '"', "£": "e", '∞': 'infinity', 'θ': 'theta', '÷': '/',
+                              "²": "2", "—": "-", "–": "-", "’": "'", "_": "-", "`": "'", "*" : "", "&": ",", "~":"",
+                              '“': '"', '”': '"', '“': '"', "£": "e", '∞': 'infinity', 'θ': 'theta', '÷': '/', "@": "",
                               'α': 'alpha', '•': '.', 'à': 'a', '−': '-', 'β': 'beta', '∅': '', '³': '3', 'π': 'pi',
-                              "^": ""}
+                              "^": "", "☺️": ""}
         self.rule = ['맘시터', '스케줄', '스케쥴', '시터', '시터분', '시터 분']  # 띄어쓰기 규칙
         self.only_BMP_pattern = re.compile("["
-        u"\U00010000-\U0010FFFF"  #BMP characters 이외
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols 
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
                            "]+", flags=re.UNICODE)
 
     def basic_Preprocessing(self, content, punct, mapping):  # html tag 제거, 숫자 제거, Lowercasing, punctuation 제거
@@ -33,8 +36,9 @@ class Preprocess:
         for text in content:
             for p in mapping:
                 text = text.replace(p, mapping[p])
+                text = self.only_BMP_pattern.sub(r'', text)
             for p in punct:
-                # text = text.replace(p, f'{p}')
+                text = text.replace(p, f'{p}')
                 # text = text.replace('"', '')
                 # text = text.replace('&', ',')
                 # text = text.replace('@', '')
@@ -47,7 +51,7 @@ class Preprocess:
                 # text = text.replace('😭', '')
                 # text = text.replace('😅', '')
                 # text = text.replace('😀', '')
-                text = self.only_BMP_pattern.sub(r'', text)
+            print(text)
 
             specials = {'\u200b': ' ', '…': ' ... ', '\ufeff': '', 'करना': '', 'है': ''}
             for s in specials:
